@@ -11,10 +11,6 @@ from helpers import login_required, goodreadsapi
 
 app = Flask(__name__)
 
-# Check for environment variable
-# dashboard.heroku.com/apps > bookso > Resources > Heroku Postgres > Settings > View Credentials > URI
-# URI:  postgres://aubztpxegumjjf:3e0bfc3b0171d7fe6a74eec96b41c776def3629f82388dd8191978531b2db12b@ec2-34-235-108-68.compute-1.amazonaws.com:5432/d4suse8hlh0tjt
-
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
 
