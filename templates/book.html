@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Book {# {{ book.title }} #}
+{% endblock %}
+{% block style %}
+    .comm-container {
+        float: left;
+        width: 49%;
+    }
+
+    .rev-container {
+        float: right;
+        width: 49%;
+    }
+{% endblock %}
+{% block body %}
+
+<p>{{ isbn }}</p>
+
+
+
+
+<div class="card mb-3">
+    <img style="height: 200px; width: 30%; display: block;" src="/static/book-cover.jpg" alt="{{ book.title }}">
+    <h2 class="card-header">Book Title: {{ book.title }}</h2>
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Author of the Book: <b>{{ book.author }}</b></li>
+        <li class="list-group-item">International Standard Book Number: {{ book.isbn }}</li>
+        <li class="list-group-item">Published in:   {{ book.year }} </li>
+        <li class="list-group-item"> Rating on This website: {{ stars[0] }}</li>
+        <li class="list-group-item">goodreads rating: {{ avrating }}</li>
+        <li class="list-group-item">goodreads ratings count: {{ ratingscount }}</li>
+    </ul>
+    <div class="card-body">
+        <a href="https://www.goodreads.com/search?q={{book.title}}" class="card-link" target="_blank">Visit on Goodreads website</a>
+    </div>
+</div>
+
+
+<form action="{{ url_for('book', isbn=book.isbn) }}" method="post">
+    <div class="card comm-container form-group">
+        <div class="card-body">
+            <div class="form-group">
+                <label>Rate the book</label>
+                <select class="form-control" name="star">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Leave a comment</label>
+                <textarea class="form-control" rows="4" spellcheck="false" name="comment"></textarea>
+            </div>
+        </div>
+        <button type="submit"class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+
+    <div class="card rev-container">
+        <div class="container">
+            <h3 class="card-header">Read Customer Reviews</h3>
+            {% if review_list %}
+                {% for comments in review_list %}
+                    <div class="card mb-3">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <h4><b>{{ comments.username }}</b></h4>
+                                <p>{{ comments.review }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No Reviews Found</p>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+{% endblock %}

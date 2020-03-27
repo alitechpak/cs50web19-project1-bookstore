@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block style %}
+    img {
+        background-image: url("/static/bgimg.jpg");
+        min-height: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+    body, html {
+        height: 100%
+    }
+    .logoutnav {
+        float: right;
+        margin: 100px 0px;
+    }
+{% endblock %}
+
+{% block body %}
+
+    {% if session.username %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Book ID</th>
+                    <th>ISBN</th>
+                    <th>TITLE</th>
+                    <th>AUTHOR</th>
+                    <th>PUBLISHED</th>
+                </tr>
+            </thead>
+            <tbody>
+    {% for book in books %}
+        <tr>
+            <td>{{book.id}}</td>
+            <td>{{book.isbn}}</td>
+            <td>{{book.title}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.year}}</td>
+        </tr>
+    {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+
+        <div class="w3-animate-opacity w3-text-red">
+            <div class="w3-display-middle">
+                <h1 class="w3-jumbo w3-animate-top">BOOK STORE</h1>
+                <hr class="w3-border-grey" style="margin:auto;width:40%">
+                <p class="w3-large w3-center">CS50W project1</p>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

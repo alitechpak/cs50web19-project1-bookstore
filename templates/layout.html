@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="/static/styles.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <title>{% block title %}{% endblock %}</title>
+
+        <style media="screen">
+            {% block style %}
+
+            {% endblock %}
+            .logoutbtn {
+                float: right;
+                margin: -150px 0px;
+                font-weight: bold;
+            }
+
+            .fontcolor {
+                color: white;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            {% if session.username %}
+                <h1>Books Store</h1>
+                <p>CS50W project1</p>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+                    </ul>
+                    <form action="{{ url_for('books') }}" method="post" class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="isbn, title or author" name="search">
+                        <button class="btn btn-default" type="submit"><i class="material-icons">search</i></button>
+                    </form>
+
+                </nav>
+                <div class="logoutbtn">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="navbar-item">Welcoome <i>{{ session.username }}</i></li>
+                    </ul>
+                    <button type="button" class="btn btn-default"><a class="nav-link" href="{{ url_for('logout') }}">Log Out</a></button>
+
+                </div>
+
+            {% else %}
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+                    </ul>
+                </nav>
+            {% endif %}
+
+            {% block body %}{% endblock %}
+            <main>
+            {% block main %}{% endblock %}
+            </main>
+
+            <footer>
+            </footer>
+        </div>
+    </body>
+</html>

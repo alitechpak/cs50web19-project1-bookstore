@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search Results
+{% endblock %}
+
+{% block style %}
+    .flex {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: space-between;
+    }
+    .flex > div {
+        width: 265px;
+        margin: 5px;
+    }
+{% endblock %}
+
+{% block body %}
+
+    <h2>Total books found: <b>{{ countofbooks[0] }}</b> </h2>
+
+    <div class="flex">
+    {% for book in searchedbooks %}
+        <div class="card border-primary mb-3" style="max-width: 20rem;">
+            <a href="{{ url_for('book', isbn=book.isbn) }}" target="_blank">
+                <div class="card-header">Title: <b>{{ book.title }}</b></div>
+                    <div class="card-body">
+                        <h4 class="card-title">Author: <b>{{ book.author }}</b></h4>
+                        <p class="card-text">ISBN: {{ book.isbn }}</p>
+                        <p class="card-text">Published: {{ book.year }}</p>
+                    </div>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+
+{% endblock %}
