@@ -153,7 +153,7 @@ def book(isbn):
         # Select review from current user
         user_review = db.execute("SELECT review FROM reviews WHERE user_id = :user_id AND book_id = :book_id",
                         {"user_id": user_id, "book_id": book_id}).fetchone()
-        if not user_review: # To avoid reviews more than one
+        if user_review: # To avoid reviews more than one
             return render_template("apology.html", message="Sorry! You already have submitted a review and only one review is allowed")
 
         else: # Insert review into sql database
