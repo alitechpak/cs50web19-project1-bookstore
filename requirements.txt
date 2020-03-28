@@ -4,5 +4,5 @@ gunicorn==20.0.4
 itsdangerous==1.1.0
 Jinja2==2.11.1
 MarkupSafe==1.1.1
-pkg-resources==0.0.0
+pkg-resources
 Werkzeug==1.0.0
