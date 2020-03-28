@@ -3,6 +3,7 @@ env.sh
 __pycache__
 flask_session
 test.py
+.env
 
 
 # Compiled source #
