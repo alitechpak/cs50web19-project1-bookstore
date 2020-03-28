@@ -11,7 +11,7 @@ from helpers import login_required, goodreadsapi
 
 app = Flask(__name__)
 
-if not os.getenv("DATABASE_URL"):
+if not os.getenv("DATABASE_URI"):
     raise RuntimeError("DATABASE_URL is not set")
 
 # Configure session to use filesystem
