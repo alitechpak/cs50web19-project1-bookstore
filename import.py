@@ -13,9 +13,9 @@ def main():
     reader = csv.reader(f)
 
     # Skip header
-    next(books, None)
+    next(reader, None)
 
-    
+
     for isbn, title, author, year in reader:
         db.execute("INSERT INTO books (isbn, title, author, year) VALUES (:isbn, :title, :author, :year)",
                         {"isbn": isbn, "title": title, "author": author, "year": year})
